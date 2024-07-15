@@ -1,0 +1,162 @@
+*{
+	padding: 0;
+	margin: 0;
+	text-decoration: none;
+	list-style: none;
+	background-size: cover;
+	color: #fff;
+	font-family: 'Times New Roman', Times, serif;
+}
+body{
+	font-family:'Times New Roman', Times, serif;
+	background-image: url(/images/image5.jpg);
+	background-size: cover;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	min-height: 100vh;
+}
+.login-page{
+	height: 60vh;
+	position: relative;
+	align-items: center;
+	width: 400px;
+	background: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.5));
+	border-radius: 10px;
+	padding: 10px 20px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+.button-box{
+    width : 210px ;
+    margin : 15px auto ;
+	margin-left:subm 90px;
+    position : relative;
+    border-radius: 30px;
+	background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.3));
+	line-height: 40px;
+	align-items: center;
+} 
+#btnMain{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100px ;
+    height: 100%;
+    background: #4d7edd;
+    border-radius: 30px;
+    transition: .5s; 
+}
+.toggle-btn{
+    padding : 12px 25px ;
+	cursor : pointer ;
+    background : transparent;
+	border : 0;
+    outline : none;
+    position : relative;
+	color: #ffff;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+}
+.login-page .form-box{
+	width: 100%;
+	padding-top: 45px;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+}
+.form-box #form{
+    width : 200%;
+    position : relative ;
+	display: flex ;
+	margin: auto;
+	transition: 0.2s ease-in-out;
+}
+#page1{
+    margin: auto;
+	width: 100%;
+	margin-top: -50px;
+	margin-bottom: 50px;
+}
+#page2{
+    margin: auto;
+	width: 100%;
+	margin-top: -60px;
+	margin-bottom: 50px;
+}
+.element{
+	position: relative;
+}
+.element input{
+	width : 90% ;
+	height: 20px;
+	padding: 10px 0;
+	margin : 10px 100px;
+	margin-left: 15px;
+	border-left : 0;
+	border-top : 0 ;
+	border-right : 0 ;
+	border-bottom: 3px solid #4d7edd ;
+	outline : none ;
+	background : transparent ;
+	font-size: 18px;
+}
+input::placeholder{
+	color: #fff;
+	font-size: 18px;
+}
+.checkbox{
+	display: flex;
+	width : 90% ;
+	padding: 5px 0;
+	margin : 5px 15px;
+	margin-left: 15px;
+}
+.checkbox label{
+	cursor: pointer;
+}
+#btn1{
+	padding: 5px 25px;
+	line-height: 25px;
+	background: #4d7edd;
+	border-radius: 30px;
+	font-size: 20px;
+	border: none;
+	cursor: pointer;
+	margin-top: 15px;
+}
+#btn2{
+	padding: 5px 25px;
+	line-height: 25px;
+	background: #4d7edd;
+	border-radius: 30px;
+	font-size: 20px;
+	border: none;
+	cursor: pointer;
+	margin-top: 1px;
+}
+#btn:active{
+	transform: scale(1.01);
+} 
+#page1 p{
+	margin-top: 15px;
+}
+#Login{
+		padding: 10px 38px; 
+		line-height: 25px;
+		background: #4d7edd;
+		font-size: 20px;
+		border: none;
+		cursor: pointer;
+		width: 60%;
+		margin-bottom: 35px;	
+		height: 45px;	
+}
+#gimage{
+	height: 44px;
+	margin-top: 35px;
+	line-height: 25px;
+	margin-bottom: -16px;
+	margin-left: 15px;
+	margin-right: -4px;
+}

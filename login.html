@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGIN PAGE | BFIT</title>
+  <link rel="stylesheet" href="loginstyles.css">
+  <script src="script.js"></script>
+  <link rel="icon" href="/images/logo.png" type="image/icon type" style="height: 30px; width: 20px;">
+</head> 
+<body>
+  <div class='login-page'> 
+    <div class = 'button-box' >
+      <div id ='btnMain'></div>
+          <button  type='button' onclick="leftClick();" class="toggle-btn">LOGIN</button >
+          
+          <button type = 'button' onclick ="rightClick();" class="toggle-btn">REGISTER</button >
+      </div >
+    
+    <div class = "form-box">
+        <form id ='form'>
+          <div id="page1">
+            <div class="element">
+              <input type ='email' placeholder='Email Id' 
+              id="Username" >
+              <span class="fas fa-user"></span>
+            </div>
+              
+            <div class="element">
+              <input type ='password' id="Password" placeholder='Password' >
+              <span class="fas fa-lock"></span>
+            </div>
+
+            <div class="checkbox">
+              <input type="checkbox" unchecked="checked" id="mark" required>
+              <span class="checkmark fas fa-checkbox"></span>
+              <label for="mark" class="element">Remember Password 
+              </label>
+            </div>
+            
+            <button id="btn1">LOGIN</button>
+              <p>──────────OR──────────</p>
+         
+              <img src="/images/google.jpg" id="gimage">
+              <button id="Login" type="button" name="SubmitData">Sign in with Google</button>
+             
+          </div>
+              
+
+          <div id="page2">
+            <div class="element">
+              <input type ='text' placeholder='First Name' required>
+              <span class="fas fa-user"></span>
+            </div>
+            <div class="element">
+              <input type ='text' placeholder='Last Name' required>
+              <span class="fas fa-user"></span>
+            </div>
+            <div class="element">
+              <input type = 'email' placeholder='Email Id' id="email" required>
+              <span class="fas fa-envelope"></span>
+            </div>
+            <div class="element">
+              <input type = 'password' placeholder='Enter Password' id="psw" required>
+              <span class="fas fa-lock"></span>
+            </div>
+            <div class="element">
+              <input type='password'placeholder='Confirm Password' required></input>
+              <span class="fas fa-lock"></span>
+            </div>
+            <div class="checkbox">
+              <input type ='checkbox' unchecked='checked' id="tick" required>
+              <label for="tick">I agree to the terms and conditions</label >
+            </div>
+            <button id="btn2">REGISTER</button>
+          </div>
+        </form> 
+      </div>
+    </div>
+</body>
+</html>
+
+
+ 
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,GoogleAuthProvider,signInWithRedirect,getRedirectResult, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+  import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
+
+
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBgoJ4Nb-G77nynbt6B4xz53jeZ1_E4jfA",
+    authDomain: "bfit-website-c536f.firebaseapp.com",
+    projectId: "bfit-website-c536f",
+    storageBucket: "bfit-website-c536f.appspot.com",
+    messagingSenderId: "822450645439",
+    appId: "1:822450645439:web:d414ae41fe68d6b2fb990a"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const database = getDatabase(app);
+  const provider = new GoogleAuthProvider(app);
+
+
+
+  btn2.addEventListener('click',(e) => {
+
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('psw').value;
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...user.uid
+        set(ref(database, 'users/' + user.uid), {
+          email: email,
+          password: password
+        })
+          .then( () => {
+            // Data saved successfully!
+            alert('Registration Successfully');
+          })
+          .catch((error) => {
+            // The write failed...
+            alert(error);
+          });
+        
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        alert(errorMessage);
+      });
+    });
+ 
+
+  btn1.addEventListener('click',(e) => {
+
+    var email = document.getElementById('Username').value;
+    var password = document.getElementById('Password').value;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+
+        var lgDate = new Date();
+        set(ref(database, 'users/' + user.uid), {
+          Username: email,
+          Password: password
+        })
+          .then( () => {
+            // Data saved successfully!
+            alert('User Logged in Successfully');
+            window.location.href = "home.html";
+          })
+          .catch((error) => {
+            // The write failed...
+            alert(error);
+          });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+
+  });
+   
+  Login.addEventListener('click',(e) =>{
+
+  //   signInWithRedirect(auth, provider);
+
+  //   getRedirectResult(auth)
+  // .then((result) => {
+  //   // This gives you a Google Access Token. You can use it to access Google APIs.
+  //   const credential = GoogleAuthProvider.credentialFromResult(result);
+  //   const token = credential.accessToken;
+
+  //   // The signed-in user info.
+  //   const user = result.user;
+  // }).catch((error) => {
+  //   // Handle Errors here.
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  //   // The email of the user's account used.
+  //   const email = error.customData.email;
+  //   // The AuthCredential type that was used.
+  //   const credential = GoogleAuthProvider.credentialFromError(error);
+  //   // ...
+  // });
+
+
+
+  signInWithPopup(auth, provider)
+     .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+
+    alert("Successfully Logged In!!");
+    window.location.href = "home.html";
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+
+    alert(errorMessage);
+    // ...
+  });
+  })
+</script>
+
